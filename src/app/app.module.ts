@@ -9,6 +9,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @NgModule({
   imports: [
@@ -18,8 +19,17 @@ import { AppComponent } from './app.component';
     IonicModule.forRoot(),
     IonicStorageModule.forRoot()
   ],
-  declarations: [AppComponent],
-  providers: [InAppBrowser, SplashScreen, StatusBar],
-  bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  providers: [
+    InAppBrowser, 
+    SplashScreen, 
+    StatusBar,
+    Camera
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule {}

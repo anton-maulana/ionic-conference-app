@@ -22,6 +22,12 @@ export class TutorialPage {
     public storage: Storage
   ) {}
 
+  ngOnInit() {
+    this.router
+    .navigateByUrl('/app/tabs/(schedule:schedule)')
+    .then(() => this.storage.set('ion_did_tutorial', 'true'));
+  }
+
   startApp() {
     this.router
       .navigateByUrl('/app/tabs/(schedule:schedule)')

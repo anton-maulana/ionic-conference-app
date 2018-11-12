@@ -1,0 +1,67 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-buttons slot="end">
+			<ion-button (click)="presentFilter()">
+				<ion-icon slot="icon-only" name="add"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+
+	<ion-toolbar>
+		<ion-searchbar [(ngModel)]="queryText" (ionChange)="updateSchedule()" placeholder="Cari">
+		</ion-searchbar>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col col-sm-2 col-md-4 col-lg-3 col-xl-3>
+				<ion-card>
+					<img src="assets/img/pc.jpg"/>
+					<ion-card-content>
+						<ion-card-title>
+						Nine Inch Nails Live
+						</ion-card-title>			
+					</ion-card-content>
+				</ion-card>
+			</ion-col>
+			<ion-col col-sm-2 col-md-4 col-lg-3 col-xl-3>
+				<ion-card>
+					<img src="assets/img/pc.jpg"/>
+					<ion-card-content>
+						<ion-card-title>
+						Nine Inch Nails Live
+						</ion-card-title>			
+					</ion-card-content>
+				</ion-card>
+			</ion-col>
+		</ion-row>
+	
+	</ion-grid>
+
+	<ion-list-header [hidden]="shownSessions > 0">
+		No Sessions Found
+	</ion-list-header>
+
+	<ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+		<ion-fab-button><ion-icon name="share"></ion-icon></ion-fab-button>
+		<ion-fab-list side="top">
+		<ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
+			<ion-icon name="logo-vimeo"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-button color="google" (click)="openSocial('Google+', fab)">
+			<ion-icon name="logo-googleplus"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
+			<ion-icon name="logo-twitter"></ion-icon>
+		</ion-fab-button>
+		<ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
+			<ion-icon name="logo-facebook"></ion-icon>
+		</ion-fab-button>
+		</ion-fab-list>
+	</ion-fab>
+</ion-content>

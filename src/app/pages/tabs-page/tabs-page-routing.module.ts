@@ -9,6 +9,7 @@ import { SchedulePage } from '../schedule/schedule';
 import { SessionDetailPage } from '../session-detail/session-detail';
 import { SpeakerDetailPage } from '../speaker-detail/speaker-detail';
 import { SpeakerListPage } from '../speaker-list/speaker-list';
+import { ProductsPage } from '../products/products';
 
 
 const routes: Routes = [
@@ -21,6 +22,11 @@ const routes: Routes = [
         path: 'schedule',
         component: SchedulePage,
         outlet: 'schedule'
+      },
+      {
+        path: 'products',
+        component: ProductsPage,
+        outlet: 'products'
       },
       {
         path: 'session/:sessionId',
