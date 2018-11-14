@@ -3,9 +3,6 @@ import { ModalController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
-// import { Camera, CameraOptions } from '@ionic-native/camera';
-
-
 
 @Component({
   selector: 'page-add-product',
@@ -14,19 +11,18 @@ import { File } from '@ionic-native/file/ngx';
   encapsulation: ViewEncapsulation.None
 })
 export class AddProductPage implements AfterViewInit {
-  tracks: {name: string, isChecked: boolean}[] = [];
-  currentImage : string='';
-  model: any = {};
+	tracks: {name: string, isChecked: boolean}[] = [];
+	currentImage: string = "";
+	model: any = {};
 
-  constructor(
-	public modalCtrl: ModalController,
-	private camera: Camera,
-	private webview: WebView,
-	private file: File
-  ) { }
+	constructor(
+		public modalCtrl: ModalController,
+		private camera: Camera,
+		private webview: WebView,
+		private file: File
+	) { }
 
-	ngAfterViewInit() {
-		
+	ngAfterViewInit() {		
 	}
 
 	resetFilters() {
