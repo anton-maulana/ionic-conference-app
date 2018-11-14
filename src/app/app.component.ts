@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   appPages = [
     {
       title: 'Products',
-      url: '/app/tabs/(schedule:schedule)',
+      url: '/app/tabs/(products:products)',
       icon: 'cart'
     },
     {
@@ -95,7 +95,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.userData.logout().then(() => {
-      return this.navigate('/app/tabs/(schedule:schedule)');
+      return this.navigate('/app/tabs/(products:products)');
     });
   }
 

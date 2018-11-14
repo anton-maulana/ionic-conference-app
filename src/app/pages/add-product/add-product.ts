@@ -14,7 +14,6 @@ import { File } from '@ionic-native/file/ngx';
   encapsulation: ViewEncapsulation.None
 })
 export class AddProductPage implements AfterViewInit {
-  
   tracks: {name: string, isChecked: boolean}[] = [];
   currentImage : string='';
   model: any = {};
@@ -41,7 +40,7 @@ export class AddProductPage implements AfterViewInit {
 	}
 
 	dismiss(data?: any) {
-		if(!data && this.model.file_name != "")
+		if(data && this.model.file_name != "")
 			this.removeImage();
 		this.modalCtrl.dismiss(data);
 	}
@@ -69,7 +68,7 @@ export class AddProductPage implements AfterViewInit {
 			this.model['file_name'] = imageData;
 			this.currentImage = this.webview.convertFileSrc(imageData)
 		  }, (err) => {
-		   // Handle error
+			  //handle mirror disini
 		});
 	}
 	  

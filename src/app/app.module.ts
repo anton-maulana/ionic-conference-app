@@ -26,8 +26,8 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
     AppComponent
   ],
   providers: [
-    InAppBrowser, 
-    SplashScreen, 
+    InAppBrowser,
+    SplashScreen,
     StatusBar,
     Camera,
     WebView,
