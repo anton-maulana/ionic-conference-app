@@ -6,10 +6,13 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { SQLite } from '@ionic-native/sqlite/ngx';
 
 @NgModule({
   imports: [
@@ -26,7 +29,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
     InAppBrowser, 
     SplashScreen, 
     StatusBar,
-    Camera
+    Camera,
+    WebView,
+    File,
+    SQLite,
   ],
   bootstrap: [
     AppComponent

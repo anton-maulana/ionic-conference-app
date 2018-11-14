@@ -4,7 +4,7 @@
 			<ion-menu-button></ion-menu-button>
 		</ion-buttons>
 		<ion-buttons slot="end">
-			<ion-button (click)="presentFilter()">
+			<ion-button (click)="openAddProduct()">
 				<ion-icon slot="icon-only" name="add"></ion-icon>
 			</ion-button>
 		</ion-buttons>
@@ -45,23 +45,5 @@
 
 	<ion-list-header [hidden]="shownSessions > 0">
 		No Sessions Found
-	</ion-list-header>
-
-	<ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
-		<ion-fab-button><ion-icon name="share"></ion-icon></ion-fab-button>
-		<ion-fab-list side="top">
-		<ion-fab-button color="vimeo" (click)="openSocial('Vimeo', fab)">
-			<ion-icon name="logo-vimeo"></ion-icon>
-		</ion-fab-button>
-		<ion-fab-button color="google" (click)="openSocial('Google+', fab)">
-			<ion-icon name="logo-googleplus"></ion-icon>
-		</ion-fab-button>
-		<ion-fab-button color="twitter" (click)="openSocial('Twitter', fab)">
-			<ion-icon name="logo-twitter"></ion-icon>
-		</ion-fab-button>
-		<ion-fab-button color="facebook" (click)="openSocial('Facebook', fab)">
-			<ion-icon name="logo-facebook"></ion-icon>
-		</ion-fab-button>
-		</ion-fab-list>
-	</ion-fab>
+	</ion-list-header>	
 </ion-content>

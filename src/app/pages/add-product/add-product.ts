@@ -1,9 +1,8 @@
 import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
-import { ConferenceData } from '../../providers/conference-data';
-import { Base64 } from '@ionic-native/base64';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { File } from '@ionic-native/file/ngx';
 // import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
@@ -17,48 +16,44 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class AddProductPage implements AfterViewInit {
   
   tracks: {name: string, isChecked: boolean}[] = [];
-  public bs64Image : string='';
+  currentImage : string='';
+  model: any = {};
 
   constructor(
-    public confData: ConferenceData,
 	public modalCtrl: ModalController,
-	private camera: Camera
+	private camera: Camera,
+	private webview: WebView,
+	private file: File
   ) { }
 
-  
-
-  // TODO use the ionViewDidEnter event
 	ngAfterViewInit() {
-		// passed in array of track names that should be excluded (unchecked)
-		const excludedTrackNames = []; // this.navParams.data.excludedTracks;
-
-		this.confData.getTracks().subscribe((trackNames: string[]) => {
-			trackNames.forEach(trackName => {
-				this.tracks.push({
-				name: trackName,
-				isChecked: (excludedTrackNames.indexOf(trackName) === -1)
-				});
-			});
-		});
+		
 	}
 
 	resetFilters() {
-		// reset all of the toggles to be checked
 		this.tracks.forEach(track => {
 		track.isChecked = true;
 		});
 	}
 
-	applyFilters() {
-		// Pass back a new array of track names to exclude
-		const excludedTrackNames = this.tracks.filter(c => !c.isChecked).map(c => c.name);
-		this.dismiss(excludedTrackNames);
+	submitProduct() {
+		this.dismiss(this.model);
 	}
 
 	dismiss(data?: any) {
-		// using the injected ModalController this page
-		// can "dismiss" itself and pass back data
+		if(!data && this.model.file_name != "")
+			this.removeImage();
 		this.modalCtrl.dismiss(data);
+	}
+
+	removeImage(){
+		let path = this.model.file_name
+		let hostPath = path.substring(0,path.lastIndexOf('/')+1);
+		let fileName = path.substring(path.lastIndexOf('/')+1);
+
+		if(this.file.checkFile(hostPath,fileName)){
+			this.file.removeFile(hostPath, fileName);
+		}
 	}
 
 	openCamera(){
@@ -66,15 +61,13 @@ export class AddProductPage implements AfterViewInit {
 			quality: 100,
 			destinationType: this.camera.DestinationType.FILE_URI,
 			encodingType: this.camera.EncodingType.JPEG,
-			mediaType: this.camera.MediaType.PICTURE
+			mediaType: this.camera.MediaType.PICTURE,
+			saveToPhotoAlbum: true
 		}
 		  
 		this.camera.getPicture(options).then((imageData) => {
-		   // imageData is either a base64 encoded string or a file URI
-		   // If it's base64 (DATA_URL):
-		   	this.bs64Image = imageData;
-			//let cameraImageSelector = document.getElementById('image-preview');
-			//icameraImageSelector.setAttribute('src', this.bs64Image);
+			this.model['file_name'] = imageData;
+			this.currentImage = this.webview.convertFileSrc(imageData)
 		  }, (err) => {
 		   // Handle error
 		});
