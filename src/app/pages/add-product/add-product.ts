@@ -4,6 +4,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
 
+
 @Component({
   selector: 'page-add-product',
   templateUrl: 'add-product.html',
@@ -14,16 +15,23 @@ export class AddProductPage implements AfterViewInit {
 	tracks: {name: string, isChecked: boolean}[] = [];
 	currentImage: string = "";
 	model: any = {};
+	
 
 	constructor(
 		public modalCtrl: ModalController,
 		private camera: Camera,
 		private webview: WebView,
-		private file: File
-	) { }
-
-	ngAfterViewInit() {		
+		private file: File,
+		
+	) {
+		
 	}
+
+	ngAfterViewInit() {	
+
+	}
+
+	
 
 	resetFilters() {
 		this.tracks.forEach(track => {

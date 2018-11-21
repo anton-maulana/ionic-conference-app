@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
+import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { SQLite } from '@ionic-native/sqlite/ngx';
     WebView,
     File,
     SQLite,
+    SQLitePorter
   ],
   bootstrap: [
     AppComponent

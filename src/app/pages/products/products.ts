@@ -5,6 +5,8 @@ import { AlertController, List, LoadingController, ModalController, ToastControl
 import { AddProductPage } from '../add-product/add-product';
 import { ConferenceData } from '../../providers/conference-data';
 import { UserData } from '../../providers/user-data';
+import { DatabaseProvider } from '../../providers/database';
+
 
 @Component({
   selector: 'page-products',
@@ -23,6 +25,7 @@ export class ProductsPage {
   shownSessions: any = [];
   groups: any = [];
   confDate: string;
+  products: any;
 
   constructor(
     public alertCtrl: AlertController,
@@ -32,8 +35,23 @@ export class ProductsPage {
     public router: Router,
     public toastCtrl: ToastController,
     public user: UserData,
-  ) { }
-
+    private databaseprovider: DatabaseProvider,
+  ) { 
+    this.databaseprovider.getDatabaseState().subscribe(rdy => {
+			if (rdy) {
+        console.log('database ready');
+        
+        this.loadProductsData();
+			}
+    })
+  }
+  loadProductsData(){
+		this.databaseprovider.getAllDevelopers().then(data => {
+      this.products = data;
+      console.log('isi data', data);
+		  })
+  }
+  
   ionViewWillEnter() {
   }
 

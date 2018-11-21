@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ionicframework.conferenceapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Ionic Conference App</name>
-    <description>Schedule, speakers, venue.</description>
+    <name>Biling Software</name>
+    <description>.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
@@ -87,7 +87,9 @@
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
     <plugin name="cordova-plugin-ionic-webview" spec="^2.2.3" />
     <plugin name="cordova-plugin-file" spec="6.0.1" />
-    <plugin name="cordova-sqlite-storage" spec="2.5.1" />
+    <plugin name="cordova-sqlite-storage" spec="^2.5.1" />
+    <plugin name="uk.co.workingedge.cordova.plugin.sqliteporter" spec="1.1.0" />
+    <plugin name="cordova-plugin-advanced-http" spec="2.0.1" />
     <engine name="android" spec="7.1.2" />
     <engine name="ios" spec="^4.5.5" />
 </widget>
