@@ -14,7 +14,10 @@ CREATE TABLE IF NOT EXISTS products
   autoincrement,
   name           TEXT,
   price          INTEGER,
+  stock          INTEGER,
   desc           TEXT,
+  code          INTEGER,
+  product_image          BLOB,
   fk_category_id INTEGER
     constraint products_category_fk_category_id
     references category,
@@ -23,19 +26,18 @@ CREATE TABLE IF NOT EXISTS products
 );
 
 
-CREATE TABLE IF NOT EXISTS products
+CREATE TABLE IF NOT EXISTS product_images
 (
-  id             INTEGER
+  id            INTEGER
     primary key
   autoincrement,
-  name           TEXT,
-  price          INTEGER,
-  desc           TEXT,
-  fk_category_id INTEGER
-    constraint products_category_fk_category_id
-    references category,
-  date_created   TEXT,
-  date_modified  TEXT
+  name          TEXT,
+  filename      TEXT,
+  fk_product_id INTEGER
+    constraint product_images_fk
+    references products,
+  date_created  TEXT,
+  date_modified TEXT
 );
 
 CREATE TABLE IF NOT EXISTS transaction_log

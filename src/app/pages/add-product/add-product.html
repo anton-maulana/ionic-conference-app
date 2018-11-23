@@ -5,7 +5,7 @@
 		</ion-buttons>
 
 		<ion-buttons slot="end">
-			<ion-button (click)="submitProduct()" strong>Simpan</ion-button>
+			<ion-button (click)="submitProduct()" strong>{{idProduct ? 'Update' : 'Simpan'}}</ion-button>
 		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
@@ -13,26 +13,32 @@
 <ion-content class="outer-content">
     <ion-item>
 		<ion-label position="floating">Nama barang</ion-label>
-		<ion-input name="product_name" [(ngModel)]="model.product_name"></ion-input>
-	</ion-item>
+		<ion-input name="product_name" [(ngModel)]="model.name" required clearInput></ion-input>
+	</ion-item>	
 	<ion-item>
-		<ion-label position="floating">Deskripsi</ion-label>
-		<ion-input name="desc" type="text" [(ngModel)]="model.desc"></ion-input>
+		<ion-label position="floating">Kode Produk</ion-label>
+		<ion-input name="desc" type="number" [(ngModel)]="model.code" required clearInput></ion-input>
 	</ion-item>
 	<ion-item>
 		<ion-label position="floating">Stock</ion-label>
-		<ion-input name="stock" type="text" [(ngModel)]="model.stock"></ion-input>
+		<ion-input name="stock" type="number" [(ngModel)]="model.stock" required></ion-input>
 	</ion-item>
 	<ion-item>
 		<ion-label position="floating">Harga Satuan</ion-label>
-		<ion-input name="price" type="number" [(ngModel)]="model.price"></ion-input>
+		<ion-input name="price" type="number" [(ngModel)]="model.price" required></ion-input>
 	</ion-item>
-	<ion-item *ngIf="currentImage != ''">
+	<ion-item>
+		<ion-label position="floating">Deskripsi</ion-label>
+		<ion-input name="desc" type="text" [(ngModel)]="model.desc" required clearInput></ion-input>
+	</ion-item>
+	<ion-button *ngIf="idProduct" color="danger" expand="full" (click)="showAlertConfirmation()">Hapus</ion-button>
+	
+	<!-- <ion-item *ngIf="currentImage != ''">
 		<ion-img [src]="currentImage"></ion-img>
 	</ion-item>
 	<ion-item>
 		<ion-label >Foto</ion-label>
 		<ion-button (click)="openCamera()" size="small">ambil foto</ion-button>		
 	</ion-item>
-	<img id="image-preview" />
+	<img id="image-preview" /> -->
 </ion-content>

@@ -1,8 +1,6 @@
-import { AfterViewInit, Component, ViewEncapsulation } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { File } from '@ionic-native/file/ngx';
+import { AfterViewInit, Component, ViewEncapsulation, Input } from '@angular/core';
+import { ModalController, NavParams, AlertController} from '@ionic/angular';
+import { DatabaseProvider } from '../../providers/database';
 
 
 @Component({
@@ -12,31 +10,30 @@ import { File } from '@ionic-native/file/ngx';
   encapsulation: ViewEncapsulation.None
 })
 export class AddProductPage implements AfterViewInit {
-	tracks: {name: string, isChecked: boolean}[] = [];
 	currentImage: string = "";
 	model: any = {};
-	
-
+	idProduct: any;
+	action: string;
+	isDelete: boolean;
 	constructor(
 		public modalCtrl: ModalController,
-		private camera: Camera,
-		private webview: WebView,
-		private file: File,
-		
+		private navParams: NavParams,
+		private databaseProvider: DatabaseProvider,
+		private alertController: AlertController
 	) {
 		
 	}
 
 	ngAfterViewInit() {	
+		this.idProduct = this.navParams.data.id;	
+		this.action = this.navParams.data.action;
 
-	}
-
-	
-
-	resetFilters() {
-		this.tracks.forEach(track => {
-		track.isChecked = true;
-		});
+		if(this.idProduct){
+			this.databaseProvider.get('products', this.idProduct).then(data => {
+				this.model = data.rows.item(0);
+				this.model['action'] = this.action;
+			})
+		}
 	}
 
 	submitProduct() {
@@ -44,36 +41,40 @@ export class AddProductPage implements AfterViewInit {
 	}
 
 	dismiss(data?: any) {
-		if(data && this.model.file_name != "")
-			this.removeImage();
 		this.modalCtrl.dismiss(data);
 	}
 
-	removeImage(){
-		let path = this.model.file_name
-		let hostPath = path.substring(0,path.lastIndexOf('/')+1);
-		let fileName = path.substring(path.lastIndexOf('/')+1);
-
-		if(this.file.checkFile(hostPath,fileName)){
-			this.file.removeFile(hostPath, fileName);
-		}
-	}
-
-	openCamera(){
-		const options: CameraOptions = {
-			quality: 100,
-			destinationType: this.camera.DestinationType.FILE_URI,
-			encodingType: this.camera.EncodingType.JPEG,
-			mediaType: this.camera.MediaType.PICTURE,
-			saveToPhotoAlbum: true
-		}
-		  
-		this.camera.getPicture(options).then((imageData) => {
-			this.model['file_name'] = imageData;
-			this.currentImage = this.webview.convertFileSrc(imageData)
-		  }, (err) => {
-			  //handle mirror disini
+	async showAlertConfirmation(){
+		let me = this;
+		const alert = await this.alertController.create({
+			header: 'Konfirmasi!',
+			message: '<strong>Apakah Anda Yakin Menghapus Product Ini</strong>!!!',
+			buttons: [
+			{
+				text: 'Batal',
+				role: 'cancel',
+				cssClass: 'secondary',
+				handler: (a) => {
+					me.isDelete = false;
+				}
+			}, {
+				text: 'Hapus',
+				handler: (a) => {
+					me.isDelete = true;
+				}
+			}
+			]
 		});
-	}
-	  
+	
+		await alert.present();		
+		await alert.onDidDismiss().then(data => {
+			if(me.isDelete){
+				me.model = {
+					action: 'delete',
+					id: me.idProduct
+				}
+				me.dismiss(me.model);
+			}
+		});		
+	} 
 }

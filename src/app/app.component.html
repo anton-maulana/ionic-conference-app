@@ -9,22 +9,27 @@
       </ion-header>
       <ion-content>
 
-        <ion-list>
-          <ion-list-header>
-            Navigate
-          </ion-list-header>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item button (click)="navigate(p.url)">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+        <ion-list>        
+          <ion-menu-toggle auto-hide="false">
+            <ion-item button (click)="exitApp()">
+              <ion-icon slot="start" name="exit"></ion-icon>
               <ion-label>
-                {{p.title}}
+                Exit
               </ion-label>
             </ion-item>
+          </ion-menu-toggle>
 
+          <ion-menu-toggle auto-hide="false">
+            <ion-item button (click)="refresh()">
+              <ion-icon name="refresh"></ion-icon>
+              <ion-label>
+                Refresh
+              </ion-label>
+            </ion-item>
           </ion-menu-toggle>
         </ion-list>
 
-        <ion-list *ngIf="loggedIn">
+        <!-- <ion-list *ngIf="loggedIn">
           <ion-list-header>
             Account
           </ion-list-header>
@@ -56,9 +61,9 @@
             </ion-item>
           </ion-menu-toggle>
 
-        </ion-list>
+        </ion-list> -->
 
-        <ion-list *ngIf="!loggedIn">
+        <!-- <ion-list *ngIf="!loggedIn">
           <ion-list-header>
             Account
           </ion-list-header>
@@ -89,15 +94,6 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-
-          <ion-menu-toggle auto-hide="false">
-            <ion-item button (click)="exitApp()">
-              <ion-icon slot="start" name="exit"></ion-icon>
-              <ion-label>
-                Exit
-              </ion-label>
-            </ion-item>
-          </ion-menu-toggle>
         </ion-list>
 
         <ion-list>
@@ -110,7 +106,7 @@
               <ion-label>Show Tutorial</ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
+        </ion-list> -->
       </ion-content>
     </ion-menu>
 

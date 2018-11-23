@@ -14,6 +14,9 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer/ngx';
+import { Base64 } from '@ionic-native/base64/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
 
 @NgModule({
   imports: [
@@ -34,7 +37,10 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
     WebView,
     File,
     SQLite,
-    SQLitePorter
+    SQLitePorter,
+    ImageResizer,
+    Base64,
+    FilePath
   ],
   bootstrap: [
     AppComponent

@@ -11,39 +11,14 @@
 	</ion-toolbar>
 
 	<ion-toolbar>
-		<ion-searchbar [(ngModel)]="queryText" (ionChange)="updateProducts()" placeholder="Cari">
+		<ion-searchbar [(ngModel)]="queryText" debounce="200" (ionChange)="filterProducts()" placeholder="Cari">
 		</ion-searchbar>
 	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-	<ion-grid>
-		<ion-row>
-			<ion-col col-sm-2 col-md-4 col-lg-3 col-xl-3>
-				<ion-card>
-					<img src="assets/img/pc.jpg"/>
-					<ion-card-content>
-						<ion-card-title>
-							Nine Inch Nails Live
-						</ion-card-title>			
-					</ion-card-content>
-				</ion-card>
-			</ion-col>
-			<ion-col col-sm-2 col-md-4 col-lg-3 col-xl-3>
-				<ion-card>
-					<img src="assets/img/pc.jpg"/>
-					<ion-card-content>
-						<ion-card-title>
-							Nine Inch Nails Live
-						</ion-card-title>			
-					</ion-card-content>
-				</ion-card>
-			</ion-col>
-		</ion-row>
-	
-	</ion-grid>
-
-	<ion-list-header [hidden]="shownSessions > 0">
-		No Sessions Found
-	</ion-list-header>	
+	<ion-item *ngFor="let product of products" (click)='updateProduct(product.id)'>
+		<ion-label>{{product.name}}</ion-label>
+		<ion-badge slot="end">{{product.price}}</ion-badge>
+	</ion-item>
 </ion-content>

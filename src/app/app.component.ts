@@ -4,7 +4,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Events, MenuController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-
 import { UserData } from './providers/user-data';
 
 @Component({
@@ -106,5 +105,11 @@ export class AppComponent implements OnInit {
   }
 
   exitApp(){
+    navigator['app'].exitApp();
+  }
+
+  refresh(){
+    this.storage.set('database_filled', false);
+    this.initializeApp();
   }
 }
